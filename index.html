@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,283 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Gulzar&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Gulzar&display=swap"
+        rel="stylesheet">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Fabric.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="app-container">
+        <!-- Vertical ToolBar -->
+        <!-- Vertical ToolBar -->
+        <nav class="toolbar-vertical">
+            <div class="toolbar-scroll-area">
+
+                <!-- Move / Select Group -->
+                <div class="tool-group">
+                    <button class="tool-btn active" id="tool-select" title="Move Tool (V)"><i
+                            class="fa-solid fa-arrows-up-down-left-right"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-select-direct" title="Direct Selection Tool (A)"><i
+                                class="fa-solid fa-arrow-pointer"></i></button>
+                        <button class="flyout-btn" id="tool-select-path" title="Path Selection Tool (A)"><i
+                                class="fa-solid fa-arrow-pointer" style="color: #000"></i></button>
+                    </div>
+                </div>
+
+                <!-- Marquee Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-marquee-rect" title="Rectangular Marquee Tool (M)"><i
+                            class="fa-regular fa-square"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-marquee-ellipse" title="Elliptical Marquee Tool (M)"><i
+                                class="fa-regular fa-circle"></i></button>
+                        <button class="flyout-btn" id="tool-marquee-single-row" title="Single Row Marquee Tool"><i
+                                class="fa-solid fa-minus"></i></button>
+                        <button class="flyout-btn" id="tool-marquee-single-col" title="Single Column Marquee Tool"><i
+                                class="fa-solid fa-grip-lines-vertical"></i></button>
+                    </div>
+                </div>
+
+                <!-- Lasso Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-lasso" title="Lasso Tool (L)"><i
+                            class="fa-solid fa-user-astronaut"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-lasso-poly" title="Polygonal Lasso Tool (L)"><i
+                                class="fa-solid fa-draw-polygon"></i></button>
+                        <button class="flyout-btn" id="tool-lasso-magnetic" title="Magnetic Lasso Tool (L)"><i
+                                class="fa-solid fa-magnet"></i></button>
+                    </div>
+                </div>
+
+                <!-- Quick Selection Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-quick-select" title="Quick Selection Tool (W)"><i
+                            class="fa-solid fa-wand-magic"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-magic-wand" title="Magic Wand Tool (W)"><i
+                                class="fa-solid fa-wand-magic-sparkles"></i></button>
+                        <button class="flyout-btn" id="tool-object-select" title="Object Selection Tool (W)"><i
+                                class="fa-solid fa-object-ungroup"></i></button>
+                    </div>
+                </div>
+
+                <!-- Crop Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-crop" title="Crop Tool (C)"><i
+                            class="fa-solid fa-crop"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-perspective-crop" title="Perspective Crop Tool (C)"><i
+                                class="fa-solid fa-crop-simple"></i></button>
+                        <button class="flyout-btn" id="tool-slice" title="Slice Tool (C)"><i
+                                class="fa-solid fa-scissors"></i></button>
+                        <button class="flyout-btn" id="tool-slice-select" title="Slice Select Tool (C)"><i
+                                class="fa-solid fa-hand-pointer"></i></button>
+                    </div>
+                </div>
+
+                <!-- Eyedropper Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-eyedropper" title="Eyedropper Tool (I)"><i
+                            class="fa-solid fa-eye-dropper"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-3d-material" title="3D Material Eyedropper Tool (I)"><i
+                                class="fa-solid fa-cube"></i></button>
+                        <button class="flyout-btn" id="tool-color-sampler" title="Color Sampler Tool (I)"><i
+                                class="fa-solid fa-crosshairs"></i></button>
+                        <button class="flyout-btn" id="tool-ruler" title="Ruler Tool (I)"><i
+                                class="fa-solid fa-ruler"></i></button>
+                        <button class="flyout-btn" id="tool-note" title="Note Tool (I)"><i
+                                class="fa-solid fa-note-sticky"></i></button>
+                        <button class="flyout-btn" id="tool-count" title="Count Tool (I)"><i
+                                class="fa-solid fa-1"></i></button>
+                    </div>
+                </div>
+
+                <hr class="toolbar-divider">
+
+                <!-- Healing Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-healing" title="Spot Healing Brush Tool (J)"><i
+                            class="fa-solid fa-band-aid"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-healing-brush" title="Healing Brush Tool (J)"><i
+                                class="fa-solid fa-kit-medical"></i></button>
+                        <button class="flyout-btn" id="tool-patch" title="Patch Tool (J)"><i
+                                class="fa-solid fa-square-person-confined"></i></button>
+                        <button class="flyout-btn" id="tool-content-aware" title="Content-Aware Move Tool (J)"><i
+                                class="fa-solid fa-arrows-up-down-left-right"></i></button>
+                        <button class="flyout-btn" id="tool-red-eye" title="Red Eye Tool (J)"><i
+                                class="fa-regular fa-eye"></i></button>
+                    </div>
+                </div>
+
+                <!-- Brush Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-brush" title="Brush Tool (B)"><i
+                            class="fa-solid fa-paint-brush"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-pencil" title="Pencil Tool (B)"><i
+                                class="fa-solid fa-pencil"></i></button>
+                        <button class="flyout-btn" id="tool-color-replace" title="Color Replacement Tool (B)"><i
+                                class="fa-solid fa-fill-drip"></i></button>
+                        <button class="flyout-btn" id="tool-mixer-brush" title="Mixer Brush Tool (B)"><i
+                                class="fa-solid fa-blender"></i></button>
+                    </div>
+                </div>
+
+                <!-- Clone Stamp Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-clone-stamp" title="Clone Stamp Tool (S)"><i
+                            class="fa-solid fa-stamp"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-pattern-stamp" title="Pattern Stamp Tool (S)"><i
+                                class="fa-solid fa-chess-board"></i></button>
+                    </div>
+                </div>
+
+                <!-- History Brush Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-history" title="History Brush Tool (Y)"><i
+                            class="fa-solid fa-clock-rotate-left"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-art-history" title="Art History Brush Tool (Y)"><i
+                                class="fa-solid fa-palette"></i></button>
+                    </div>
+                </div>
+
+                <!-- Eraser Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-eraser" title="Eraser Tool (E)"><i
+                            class="fa-solid fa-eraser"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-bg-eraser" title="Background Eraser Tool (E)"><i
+                                class="fa-solid fa-camera-retro"></i></button>
+                        <button class="flyout-btn" id="tool-magic-eraser" title="Magic Eraser Tool (E)"><i
+                                class="fa-solid fa-wand-magic-sparkles"></i></button>
+                    </div>
+                </div>
+
+                <!-- Gradient / Paint Bucket Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-gradient" title="Gradient Tool (G)"><i
+                            class="fa-solid fa-circle-half-stroke"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-paint-bucket" title="Paint Bucket Tool (G)"><i
+                                class="fa-solid fa-fill"></i></button>
+                        <button class="flyout-btn" id="tool-3d-drop" title="3D Material Drop Tool (G)"><i
+                                class="fa-solid fa-cubes"></i></button>
+                    </div>
+                </div>
+
+                <!-- Blur / Sharpen / Smudge -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-blur" title="Blur Tool"><i
+                            class="fa-solid fa-droplet"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-sharpen" title="Sharpen Tool"><i
+                                class="fa-solid fa-mountain"></i></button>
+                        <button class="flyout-btn" id="tool-smudge" title="Smudge Tool"><i
+                                class="fa-solid fa-fingerprint"></i></button>
+                    </div>
+                </div>
+
+                <!-- Dodge / Burn / Sponge -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-dodge" title="Dodge Tool (O)"><i
+                            class="fa-solid fa-magnifying-glass-chart"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-burn" title="Burn Tool (O)"><i
+                                class="fa-solid fa-hand-fist"></i></button>
+                        <button class="flyout-btn" id="tool-sponge" title="Sponge Tool (O)"><i
+                                class="fa-solid fa-soap"></i></button>
+                    </div>
+                </div>
+
+                <hr class="toolbar-divider">
+
+                <!-- Pen Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-pen" title="Pen Tool (P)"><i
+                            class="fa-solid fa-pen-nib"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-freeform-pen" title="Freeform Pen Tool (P)"><i
+                                class="fa-solid fa-signature"></i></button>
+                        <button class="flyout-btn" id="tool-curvature-pen" title="Curvature Pen Tool (P)"><i
+                                class="fa-solid fa-bezier-curve"></i></button>
+                        <button class="flyout-btn" id="tool-add-anchor" title="Add Anchor Point Tool"><i
+                                class="fa-solid fa-plus"></i></button>
+                        <button class="flyout-btn" id="tool-delete-anchor" title="Delete Anchor Point Tool"><i
+                                class="fa-solid fa-minus"></i></button>
+                        <button class="flyout-btn" id="tool-convert-point" title="Convert Point Tool"><i
+                                class="fa-solid fa-angle-left"></i></button>
+                    </div>
+                </div>
+
+                <!-- Text Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-text" title="Horizontal Type Tool (T)"><i
+                            class="fa-solid fa-t"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-text-vert" title="Vertical Type Tool (T)"><i
+                                class="fa-solid fa-text-height"></i></button>
+                        <button class="flyout-btn" id="tool-text-mask-horiz" title="Horizontal Type Mask Tool (T)"><i
+                                class="fa-regular fa-object-group"></i></button>
+                        <button class="flyout-btn" id="tool-text-mask-vert" title="Vertical Type Mask Tool (T)"><i
+                                class="fa-solid fa-border-none"></i></button>
+                    </div>
+                </div>
+
+                <!-- Shapes Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-shape" title="Rectangle Tool (U)"><i
+                            class="fa-solid fa-vector-square"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-shape-rounded" title="Rounded Rectangle Tool (U)"><i
+                                class="fa-regular fa-square"></i></button>
+                        <button class="flyout-btn" id="tool-shape-ellipse" title="Ellipse Tool (U)"><i
+                                class="fa-regular fa-circle"></i></button>
+                        <button class="flyout-btn" id="tool-shape-triangle" title="Triangle Tool (U)"><i
+                                class="fa-solid fa-caret-up"></i></button>
+                        <button class="flyout-btn" id="tool-shape-polygon" title="Polygon Tool (U)"><i
+                                class="fa-solid fa-draw-polygon"></i></button>
+                        <button class="flyout-btn" id="tool-shape-line" title="Line Tool (U)"><i
+                                class="fa-solid fa-minus"></i></button>
+                        <button class="flyout-btn" id="tool-shape-custom" title="Custom Shape Tool (U)"><i
+                                class="fa-solid fa-star"></i></button>
+                    </div>
+                </div>
+
+                <!-- Hand Group -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-hand" title="Hand Tool (H)"><i
+                            class="fa-solid fa-hand"></i></button>
+                    <div class="flyout-menu">
+                        <button class="flyout-btn" id="tool-rotate-view" title="Rotate View Tool (R)"><i
+                                class="fa-solid fa-rotate"></i></button>
+                    </div>
+                </div>
+
+                <!-- Zoom -->
+                <div class="tool-group">
+                    <button class="tool-btn" id="tool-zoom" title="Zoom Tool (Z)"><i
+                            class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+
+            <!-- Color Swatches -->
+            <div class="color-swatches" title="Foreground & Background Colors">
+                <input type="color" id="fgColor" value="#3b82f6" title="Foreground Color">
+                <input type="color" id="bgColor" value="#ffffff" title="Background Color">
+            </div>
+        </nav>
+
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="brand">
@@ -24,9 +293,15 @@
             </div>
 
             <div class="tabs">
-                <button class="tab-btn active" data-target="templates"><i class="fa-regular fa-images"></i> Templates</button>
-                <button class="tab-btn" data-target="text"><i class="fa-solid fa-t"></i> Text Tools</button>
-                <button class="tab-btn" data-target="elements"><i class="fa-solid fa-shapes"></i> Elements</button>
+                <button class="tab-btn active" data-target="templates" title="Templates"><i
+                        class="fa-regular fa-images"></i></button>
+                <button class="tab-btn" data-target="text" title="Text Tools"><i class="fa-solid fa-t"></i></button>
+                <button class="tab-btn" data-target="elements" title="Images/Layers"><i
+                        class="fa-solid fa-image"></i></button>
+                <button class="tab-btn" data-target="shapes" title="Draw/Shapes"><i
+                        class="fa-solid fa-shapes"></i></button>
+                <button class="tab-btn" data-target="adjustments" title="Adjustments"><i
+                        class="fa-solid fa-sliders"></i></button>
             </div>
 
             <div class="tab-content active" id="templates">
@@ -34,11 +309,16 @@
                 <div class="template-gallery" id="templateGallery">
                     <!-- Javascript will load templates here -->
                 </div>
-                <div class="upload-custom">
+                <div class="upload-custom" style="margin-top: 10px;">
                     <label for="uploadTemplate" class="upload-btn">
-                        <i class="fa-solid fa-cloud-arrow-up"></i> Upload Custom Background
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Custom Background Image
                     </label>
                     <input type="file" id="uploadTemplate" accept="image/*" style="display:none">
+                </div>
+                <hr class="divider">
+                <h3>Solid Background Color</h3>
+                <div class="control-group">
+                    <input type="color" id="canvasBgColor" value="#ffffff" style="width: 100%;">
                 </div>
             </div>
 
@@ -46,15 +326,30 @@
                 <h3>Add Urdu Text</h3>
                 <div class="text-controls">
                     <textarea id="textInput" placeholder="اردو میں لکھیں... (Type in Urdu...)" dir="rtl"></textarea>
-                    
+
                     <div class="control-group">
                         <label>Font Family</label>
                         <select id="fontFamily">
-                            <option value="Noto Nastaliq Urdu">Noto Nastaliq (Standard)</option>
-                            <option value="Gulzar">Gulzar (Bold Heading)</option>
-                            <option value="Aref Ruqaa">Aref Ruqaa (Stylized)</option>
-                            <option value="Inter">Inter (English)</option>
+                            <optgroup label="Urdu Fonts">
+                                <option value="Noto Nastaliq Urdu">Noto Nastaliq (Standard)</option>
+                                <option value="Gulzar">Gulzar (Bold Heading)</option>
+                                <option value="Aref Ruqaa">Aref Ruqaa (Stylized)</option>
+                                <option value="Jameel Noori Nastaleeq">Jameel Noori Nastaleeq (Local)</option>
+                                <option value="Alvi Nastaleeq">Alvi Nastaleeq (Local)</option>
+                                <option value="Nafees Nastaleeq">Nafees Nastaleeq (Local)</option>
+                            </optgroup>
+                            <optgroup label="System / English Fonts">
+                                <option value="Inter">Inter</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Impact">Impact</option>
+                                <option value="Comic Sans MS">Comic Sans MS</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Courier New">Courier New</option>
+                            </optgroup>
                         </select>
+                        <input type="text" id="customFontName" placeholder="Or type local font name..." class="mt-2"
+                            style="margin-top: 8px;">
                     </div>
 
                     <div class="control-row">
@@ -72,7 +367,7 @@
                 </div>
 
                 <hr class="divider">
-                
+
                 <h3>Edit Selected Text</h3>
                 <div class="edit-controls" id="editControls">
                     <p class="muted-text">Select text on canvas to edit.</p>
@@ -90,15 +385,108 @@
 
                 <hr class="divider">
 
-                <h3>Layer Order</h3>
-                <div class="layer-controls">
-                    <button id="bringForward"><i class="fa-solid fa-arrow-up"></i> Bring Forward</button>
-                    <button id="sendBackward"><i class="fa-solid fa-arrow-down"></i> Send Backward</button>
+                <h3>Transform</h3>
+                <div class="shape-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 15px;">
+                    <button class="secondary-btn" id="flipX"><i class="fa-solid fa-arrows-left-right"></i> Flip
+                        H</button>
+                    <button class="secondary-btn" id="flipY"><i class="fa-solid fa-arrows-up-down"></i> Flip V</button>
+                </div>
+
+                <h3>Layer Actions</h3>
+                <div class="layer-controls" style="margin-bottom: 8px;">
+                    <button id="bringForward" title="Bring Forward"><i class="fa-solid fa-arrow-up"></i>
+                        Forward</button>
+                    <button id="sendBackward" title="Send Backward"><i class="fa-solid fa-arrow-down"></i>
+                        Backward</button>
                 </div>
 
                 <hr class="divider">
-                <button id="deleteElement" class="danger-btn"><i class="fa-solid fa-trash"></i> Delete Selected</button>
+                <div class="control-row">
+                    <button id="duplicateElement" class="secondary-btn"><i class="fa-solid fa-copy"></i>
+                        Duplicate</button>
+                    <button id="deleteElement" class="danger-btn"><i class="fa-solid fa-trash"></i> Delete</button>
+                </div>
             </div>
+
+            <div class="tab-content" id="shapes">
+                <h3>Drawing Tools</h3>
+                <div class="draw-controls">
+                    <button class="secondary-btn" id="toggleDrawMode" style="width:100%;"><i
+                            class="fa-solid fa-pen"></i> Enable Free Drawing</button>
+                    <div class="control-row mt-3" id="drawSettings" style="display:none; margin-top:10px;">
+                        <div class="control-group">
+                            <label>Brush Color</label>
+                            <input type="color" id="drawColor" value="#ffffff">
+                        </div>
+                        <div class="control-group">
+                            <label>Brush Size</label>
+                            <input type="number" id="drawSize" value="5" min="1" max="50">
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <h3>Add Shapes</h3>
+                <div class="shape-grid">
+                    <button class="shape-btn" data-shape="rect" title="Rectangle"><i
+                            class="fa-regular fa-square"></i></button>
+                    <button class="shape-btn" data-shape="circle" title="Circle"><i
+                            class="fa-regular fa-circle"></i></button>
+                    <button class="shape-btn" data-shape="triangle" title="Triangle"><i
+                            class="fa-solid fa-caret-up"></i></button>
+                    <button class="shape-btn" data-shape="line" title="Line"><i class="fa-solid fa-minus"></i></button>
+                </div>
+
+                <div class="control-row mt-3" style="margin-top:10px;">
+                    <div class="control-group">
+                        <label>Shape Fill</label>
+                        <input type="color" id="shapeColor" value="#3b82f6">
+                    </div>
+                    <div class="control-group">
+                        <label>Outline</label>
+                        <input type="color" id="shapeOutlineColor" value="#000000">
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="adjustments">
+                <h3>Object Adjustments</h3>
+                <p class="muted-text" style="padding-bottom:10px; padding-top:0;">Select an image or object to adjust
+                </p>
+
+                <div id="filterControls" class="filter-controls">
+                    <div class="control-group">
+                        <label>Opacity</label>
+                        <input type="range" id="objOpacity" min="0" max="100" value="100">
+                    </div>
+
+                    <div id="imageFilters" style="display:none;">
+                        <hr class="divider">
+                        <h4>Image Filters</h4>
+                        <div class="control-group mt-2" style="margin-top:10px;">
+                            <label>Brightness</label>
+                            <input type="range" id="imgBrightness" min="-100" max="100" value="0">
+                        </div>
+
+                        <div class="control-group mt-2" style="margin-top:10px;">
+                            <label>Contrast</label>
+                            <input type="range" id="imgContrast" min="-100" max="100" value="0">
+                        </div>
+
+                        <div class="control-group mt-2" style="margin-top:10px;">
+                            <label>Saturation</label>
+                            <input type="range" id="imgSaturation" min="-100" max="100" value="0">
+                        </div>
+
+                        <div class="control-group mt-2" style="margin-top:10px;">
+                            <label>Blur</label>
+                            <input type="range" id="imgBlur" min="0" max="100" value="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </aside>
 
         <!-- Main Workspace -->
@@ -108,15 +496,29 @@
                     <input type="text" id="posterName" value="School_Admission_Poster" class="invisible-input">
                 </div>
                 <div class="actions">
-                    <button id="resetCanvas" class="secondary-btn"><i class="fa-solid fa-rotate-left"></i> Reset Canvas</button>
-                    <button id="downloadBtn" class="primary-btn pulse"><i class="fa-solid fa-download"></i> Download Poster</button>
+                    <button id="undoBtn" class="secondary-btn"><i class="fa-solid fa-rotate-left"></i></button>
+                    <button id="redoBtn" class="secondary-btn"><i class="fa-solid fa-rotate-right"></i></button>
+                    <button id="resetCanvas" class="secondary-btn"><i class="fa-solid fa-trash-can"></i> Clear
+                        All</button>
+                    <button id="downloadBtn" class="primary-btn pulse"><i class="fa-solid fa-download"></i> Download
+                        Poster</button>
                 </div>
             </header>
-            
+
             <div class="canvas-container-outer">
                 <div class="canvas-wrapper">
                     <canvas id="posterCanvas"></canvas>
                 </div>
+                <!-- Crop UI Overlay -->
+                <div id="cropOverlay" class="crop-overlay" style="display:none;">
+                    <div class="crop-btn-group">
+                        <button id="confirmCropBtn" class="primary-btn pulse"><i class="fa-solid fa-check"></i> Apply
+                            Crop</button>
+                        <button id="cancelCropBtn" class="secondary-btn"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+                <!-- Toast Notification Container -->
+                <div id="toastContainer" class="toast-container"></div>
             </div>
         </main>
     </div>
@@ -124,4 +526,5 @@
     <!-- Initialization and Logic -->
     <script src="app.js"></script>
 </body>
+
 </html>
