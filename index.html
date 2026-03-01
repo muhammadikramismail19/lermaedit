@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urdu Poster Maker - School Admissions</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Gulzar&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fabric.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h2>Poster<span class="highlight">Maker</span></h2>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-target="templates"><i class="fa-regular fa-images"></i> Templates</button>
+                <button class="tab-btn" data-target="text"><i class="fa-solid fa-t"></i> Text Tools</button>
+                <button class="tab-btn" data-target="elements"><i class="fa-solid fa-shapes"></i> Elements</button>
+            </div>
+
+            <div class="tab-content active" id="templates">
+                <h3>Select a Template</h3>
+                <div class="template-gallery" id="templateGallery">
+                    <!-- Javascript will load templates here -->
+                </div>
+                <div class="upload-custom">
+                    <label for="uploadTemplate" class="upload-btn">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Upload Custom Background
+                    </label>
+                    <input type="file" id="uploadTemplate" accept="image/*" style="display:none">
+                </div>
+            </div>
+
+            <div class="tab-content" id="text">
+                <h3>Add Urdu Text</h3>
+                <div class="text-controls">
+                    <textarea id="textInput" placeholder="اردو میں لکھیں... (Type in Urdu...)" dir="rtl"></textarea>
+                    
+                    <div class="control-group">
+                        <label>Font Family</label>
+                        <select id="fontFamily">
+                            <option value="Noto Nastaliq Urdu">Noto Nastaliq (Standard)</option>
+                            <option value="Gulzar">Gulzar (Bold Heading)</option>
+                            <option value="Aref Ruqaa">Aref Ruqaa (Stylized)</option>
+                            <option value="Inter">Inter (English)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-row">
+                        <div class="control-group">
+                            <label>Color</label>
+                            <input type="color" id="textColor" value="#ffffff">
+                        </div>
+                        <div class="control-group">
+                            <label>Size</label>
+                            <input type="number" id="textSize" value="48" min="10" max="200">
+                        </div>
+                    </div>
+
+                    <button id="addTextBtn" class="primary-btn"><i class="fa-solid fa-plus"></i> Add Text</button>
+                </div>
+
+                <hr class="divider">
+                
+                <h3>Edit Selected Text</h3>
+                <div class="edit-controls" id="editControls">
+                    <p class="muted-text">Select text on canvas to edit.</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="elements">
+                <h3>Add Images/Logos</h3>
+                <div class="upload-custom">
+                    <label for="uploadImage" class="upload-btn">
+                        <i class="fa-solid fa-image"></i> Upload Logo/Image
+                    </label>
+                    <input type="file" id="uploadImage" accept="image/*" style="display:none">
+                </div>
+
+                <hr class="divider">
+
+                <h3>Layer Order</h3>
+                <div class="layer-controls">
+                    <button id="bringForward"><i class="fa-solid fa-arrow-up"></i> Bring Forward</button>
+                    <button id="sendBackward"><i class="fa-solid fa-arrow-down"></i> Send Backward</button>
+                </div>
+
+                <hr class="divider">
+                <button id="deleteElement" class="danger-btn"><i class="fa-solid fa-trash"></i> Delete Selected</button>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <header class="top-bar">
+                <div class="doc-info">
+                    <input type="text" id="posterName" value="School_Admission_Poster" class="invisible-input">
+                </div>
+                <div class="actions">
+                    <button id="resetCanvas" class="secondary-btn"><i class="fa-solid fa-rotate-left"></i> Reset Canvas</button>
+                    <button id="downloadBtn" class="primary-btn pulse"><i class="fa-solid fa-download"></i> Download Poster</button>
+                </div>
+            </header>
+            
+            <div class="canvas-container-outer">
+                <div class="canvas-wrapper">
+                    <canvas id="posterCanvas"></canvas>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Initialization and Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
